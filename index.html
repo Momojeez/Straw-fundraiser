@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Straw Fundraiser</title>
+    <title>Video Editor Fundraiser</title>
     <style>
         * {
             margin: 0;
@@ -14,7 +14,7 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
             min-height: 100vh;
             color: #333;
         }
@@ -47,17 +47,18 @@
             position: absolute;
             top: 0;
             right: 0;
-            background: rgba(255,255,255,0.9);
-            color: #4f46e5;
-            padding: 10px 20px;
-            border-radius: 25px;
+            background: rgba(255,255,255,0.95);
+            color: #ff6b6b;
+            padding: 12px 24px;
+            border-radius: 30px;
             font-weight: bold;
             font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
         .main-content {
             display: grid;
-            grid-template-columns: 2fr 1fr;
+            grid-template-columns: 1fr 1fr;
             gap: 30px;
             margin-bottom: 40px;
         }
@@ -65,6 +66,7 @@
         @media (max-width: 768px) {
             .main-content {
                 grid-template-columns: 1fr;
+                gap: 20px;
             }
             .user-coins {
                 position: static;
@@ -74,10 +76,11 @@
         }
 
         .progress-section {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
         .goal-display {
@@ -130,7 +133,7 @@
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #4f46e5, #7c3aed);
+            background: linear-gradient(90deg, #ff6b6b, #ee5a24);
             border-radius: 15px;
             transition: width 0.5s ease;
             position: relative;
@@ -165,9 +168,11 @@
         }
 
         .quick-amount:hover, .quick-amount.selected {
-            border-color: #4f46e5;
-            background: #4f46e5;
+            border-color: #ff6b6b;
+            background: #ff6b6b;
             color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
         }
 
         .custom-input {
@@ -190,15 +195,16 @@
 
         .donate-btn {
             width: 100%;
-            padding: 15px;
-            background: linear-gradient(90deg, #4f46e5, #7c3aed);
+            padding: 18px;
+            background: linear-gradient(90deg, #ff6b6b, #ee5a24);
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 15px;
             font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
-            transition: transform 0.2s ease;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
         }
 
         .donate-btn:hover:not(:disabled) {
@@ -225,10 +231,11 @@
         }
 
         .stats-card, .activity-card {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
         .stats-grid {
@@ -247,7 +254,7 @@
         .stat-value {
             font-size: 1.5rem;
             font-weight: bold;
-            color: #4f46e5;
+            color: #ff6b6b;
         }
 
         .stat-label {
@@ -262,14 +269,15 @@
         }
 
         .reward-btn {
-            padding: 12px 24px;
-            background: linear-gradient(90deg, #10b981, #059669);
+            padding: 15px 28px;
+            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 15px;
             font-weight: bold;
             cursor: pointer;
-            transition: transform 0.2s ease;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 210, 255, 0.4);
         }
 
         .reward-btn:hover:not(:disabled) {
@@ -299,7 +307,7 @@
 
         .activity-donor {
             font-weight: bold;
-            color: #4f46e5;
+            color: #ff6b6b;
         }
 
         .activity-amount {
@@ -394,7 +402,7 @@
 
         .donator-rank {
             font-weight: bold;
-            color: #4f46e5;
+            color: #ff6b6b;
             margin-right: 10px;
         }
 
@@ -450,7 +458,7 @@
     <div class="container">
         <div class="header">
             <div class="user-coins" id="userCoins">🪙 Your Coins: 50.0K</div>
-            <h1>🥤 Straw Fundraiser</h1>
+            <h1>🎬 Video Editor Fundraiser</h1>
             <p>Help us reach our goal and unlock amazing rewards!</p>
         </div>
 
@@ -542,13 +550,14 @@
 
         // Firebase configuration
         const firebaseConfig = {
-            apiKey: "AIzaSyAmRst7uhL_gS4U0bQABowrcV0E-Ezlg9Y",
-            authDomain: "strawfundraiser.firebaseapp.com",
-            databaseURL: "https://strawfundraiser-default-rtdb.firebaseio.com",
-            projectId: "strawfundraiser",
-            storageBucket: "strawfundraiser.firebasestorage.app",
-            messagingSenderId: "211534760286",
-            appId: "1:211534760286:web:76c08f7e666919f08b67cf"
+            apiKey: "AIzaSyAA9cKZi1r4W4ycxWj2OsvDaFmBKMQqCds",
+            authDomain: "videoeditorfundraiser.firebaseapp.com",
+            databaseURL: "https://videoeditorfundraiser-default-rtdb.firebaseio.com",
+            projectId: "videoeditorfundraiser",
+            storageBucket: "videoeditorfundraiser.firebasestorage.app",
+            messagingSenderId: "470003540715",
+            appId: "1:470003540715:web:75b8f2e66d5d7a93c294ae",
+            measurementId: "G-4DDKZCPFL5"
         };
 
         // Initialize Firebase
