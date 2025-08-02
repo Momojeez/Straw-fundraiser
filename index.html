@@ -513,7 +513,7 @@
 
                     <div class="daily-reward">
                         <h4>🎁 Daily Reward</h4>
-                        <button class="reward-btn" id="dailyRewardBtn">Claim 5,000 Coins</button>
+                        <button class="reward-btn" id="dailyRewardBtn">Claim 50,000 Coins</button>
                         <div id="rewardTimer" style="margin-top: 10px; font-size: 0.9rem; color: #666;"></div>
                     </div>
 
@@ -870,12 +870,12 @@
 
                 try {
                     // Give coins to user
-                    this.userCoins += 5000;
+                    this.userCoins += 50000;
                     this.saveUserData();
                     this.updateUserCoinsDisplay();
 
                     const donation = {
-                        amount: 5000,
+                        amount: 50000,
                         donor: 'Daily Reward System',
                         message: 'Daily reward contribution',
                         timestamp: now,
@@ -886,7 +886,7 @@
                     const donationsRef = ref(db, 'donations');
                     await push(donationsRef, donation);
 
-                    await this.updateStats(5000);
+                    await this.updateStats(50000);
 
                     const rewardRef = ref(db, `dailyRewards/${this.userId}`);
                     await set(rewardRef, {
@@ -895,18 +895,18 @@
                     });
 
                     localStorage.setItem('lastRewardTime', now.toString());
-                    this.showNotification('🎁 Daily reward claimed! +5,000 coins added to your balance and fundraiser!', false);
+                    this.showNotification('🎁 Daily reward claimed! +50,000 coins added to your balance and fundraiser!', false);
 
                 } catch (error) {
                     console.error('Daily reward error:', error);
                     // Refund coins on error
-                    this.userCoins -= 5000;
+                    this.userCoins -= 50000;
                     this.saveUserData();
                     this.updateUserCoinsDisplay();
                     this.showError('Failed to claim daily reward. Please try again.');
                 } finally {
                     this.elements.dailyRewardBtn.disabled = false;
-                    this.elements.dailyRewardBtn.textContent = 'Claim 5,000 Coins';
+                    this.elements.dailyRewardBtn.textContent = 'Claim 50,000 Coins';
                 }
             }
 
